@@ -46,7 +46,7 @@ preprocess = st.sidebar.radio("Choose Scaler", ("StandardScaler: Scale to 0 mean
 env = Environment(
     loader=FileSystemLoader(template_path), trim_blocks=True, lstrip_blocks=True,
 )
-template = environment.get_template("code-template.py.jinja")
+template = env.get_template("code-template.py.jinja")
 code = template.render(notebook=False, **inputs)
 
 st.code(code)
