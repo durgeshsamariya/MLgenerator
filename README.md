@@ -10,31 +10,25 @@ MLGenerator is simple web based machine learning starter code generator, build u
 
 ## Major Machine Learning Algorithms included in MLGenerator
 
-1. Regression
+1. Classification
 - Linear Regression
-- Polynomial Regression
-- Exponential Regression
-- Logistic Regression
-- Logarithmic Regression
-
-2. Classification
 - k-Nearest Neighbors (k-NN)
 - Decision Trees
 - Random Forest
 - Support Vector Machine
 - Naive Bayes
 
-3. Clustering
+2. Clustering
 - K-means
 - DBSCAN
 - OPTICS
 - BIRCH
 
-4. Anomaly Detection
+3. Anomaly Detection
 - LOF
 - iForest
 - kNN
 
-5. Dimensionality Reduction
+4. Dimensionality Reduction
 - PCA
 - t-SNE
