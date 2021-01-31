@@ -1,4 +1,6 @@
 {# Reference: Jinaja 2 Tutorial: https://zetcode.com/python/jinja/ #}
+{{ header("Install required libraries")}}
+
 # install required libraries
 # pip install pyod {% if data == "Benchmark data" %}pandas scikit-learn {% endif %}
 
@@ -80,9 +82,9 @@ y_test_scores = clf.decision_function(X_test)  # outlier scores
 print("\nOn Test Data:")
 evaluate_print(clf_name, y_test, y_test_scores)
 
-{% if visualization_status %}
-
 {{ header("Visualization")}}
+{% if data == "Synthetic data" %}
+{% if visualization_status %}
 {% if n_features == 2 %}
 
 # visualize the results
@@ -97,4 +99,8 @@ visualize(clf_name, X_train, y_train, X_test, y_test, y_train_pred,
 {% else %}
 # You can only visulize two dimensional data set,so set number of features = 2.
 {% endif %}
+{% endif %}
+
+{% else %}
+# You can only perform visualization on two dimensional Synthetic data set.
 {% endif %}
