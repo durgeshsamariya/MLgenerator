@@ -1,8 +1,8 @@
 import streamlit as st
 import os
-from sidebars import kNN_AD_sidebar
-from sidebars import LOF_sidebar
-from sidebars import iForest_sidebar
+from sidebars.anomaly_detection_sidebars import kNN_ad_sidebar
+from sidebars.anomaly_detection_sidebars import LOF_sidebar
+from sidebars.anomaly_detection_sidebars import iForest_sidebar
 import base64
 from jinja2 import Environment, FileSystemLoader
 
@@ -50,7 +50,7 @@ with st.sidebar:
         if algorithm == "iForest":
             inputs = iForest_sidebar()
         if algorithm == "kNN":
-            inputs = kNN_AD_sidebar()
+            inputs = kNN_ad_sidebar()
 
 env = Environment(loader=FileSystemLoader(template_path), trim_blocks=True, lstrip_blocks=True)
 
