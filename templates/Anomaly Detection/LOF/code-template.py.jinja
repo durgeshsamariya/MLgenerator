@@ -1,6 +1,6 @@
 {# Reference: Jinaja 2 Tutorial: https://zetcode.com/python/jinja/ #}
 # install required libraries
-# pip install pyod
+# pip install pyod {% if data == "Benchmark data" %}pandas scikit-learn {% endif %}
 
 {{ header("Import required libraries")}}
 
@@ -10,6 +10,7 @@ from pyod.utils.data import generate_data
 from pyod.utils.data import evaluate_print
 from pyod.utils.example import visualize
 {% if data == "Benchmark data" %}
+import pandas as pd
 from sklearn.model_selection import train_test_split 
 {% endif %}
 
@@ -40,7 +41,7 @@ X_train, y_train, X_test, y_test = generate_data(n_train=n_train,
                                                     random_state=42)
 {% else %}
 # Loading {{dataset}} dataset
-data = pd.read_csv("./data/{{dataset}}.csv")
+data = pd.read_csv("./data/ad/{{dataset}}.csv")
 X = data.copy().drop('outlier', axis=1)
 y = data['outlier']
 

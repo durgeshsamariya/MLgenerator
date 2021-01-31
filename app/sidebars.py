@@ -12,6 +12,13 @@ SEARCH_ALGORITHM = {
     "Brute-Force search": "brute"
 }
 
+ANOMALY_DETECTION_DATASETS = {
+    "Glass": "glass",
+    "Heart Disease": "heart_disease",
+    "KDDCup99": "kddcup99",
+    "Mnist": "mnist"
+}
+
 def kNN_sidebar():
     inputs = {}
     with st.sidebar:
@@ -42,9 +49,10 @@ def LOF_sidebar():
                 "number of features in data set", 1, None, 2,
             )
         elif inputs["data"] == "Benchmark data":
-            inputs["dataset"] = st.selectbox(
-                "Which one?", ("KDDCup99", )
+            dataset = st.selectbox(
+                "Which one?", list(ANOMALY_DETECTION_DATASETS.keys())
             )
+            inputs["dataset"] = ANOMALY_DETECTION_DATASETS[dataset]
         inputs['k'] = st.sidebar.number_input(
             "k?", 1, None, 10,
         )
@@ -52,7 +60,7 @@ def LOF_sidebar():
             "Which nearest neighbor search algorithm do you want to use?",
             list(SEARCH_ALGORITHM.keys()),
         )
-        inputs["search_algo"]  = SEARCH_ALGORITHM[algo]
+        inputs["search_algo"] = SEARCH_ALGORITHM[algo]
         dist = st.selectbox(
             "Which distance metric do you want to use?",
             list(DISTANCE_METRICS.keys()),
