@@ -2,6 +2,7 @@ import streamlit as st
 import os
 from sidebars import kNN_sidebar
 from sidebars import LOF_sidebar
+from sidebars import iForest_sidebar
 import base64
 from jinja2 import Environment, FileSystemLoader
 
@@ -18,9 +19,7 @@ def download_button(code, filename, text="Download (.py)"):
 st.title("Machine Learning Code Generator")
 st.write("by Durgesh Samariya")
 st.markdown("-----")
-st.write("# Under Constraction")
-st.markdown("----")
-#templates = collections.defaultdict(dict)
+
 templates = {
     'Anomaly Detection': {
         'LOF': 'templates/Anomaly Detection/LOF',
@@ -34,28 +33,24 @@ templates = {
     }
 }
 
-#with st.sidebar:
-st.sidebar.write("## Choose Task")
-task = st.sidebar.selectbox("Task", list(templates.keys()))
-if isinstance(templates[task], dict):
-    algorithm = st.sidebar.selectbox(
-        "Which Algorithm?", list(templates[task].keys())
-    )
-    template_path = templates[task][algorithm]
-else:
-    template_path = templates[task]
+with st.sidebar:
+    st.write("## Choose Task")
+    task = st.selectbox("Task", list(templates.keys()))
+    if isinstance(templates[task], dict):
+        algorithm = st.sidebar.selectbox(
+            "Which Algorithm?", list(templates[task].keys())
+        )
+        template_path = templates[task][algorithm]
+    else:
+        template_path = templates[task]
 
-st.sidebar.write("### Hyperparameters")
-#print(algorithm)
-if algorithm == 'LOF':
-    inputs = LOF_sidebar()
+    if algorithm == 'LOF':
+        inputs = LOF_sidebar()
+    if algorithm == "iForest":
+        inputs = iForest_sidebar()
 
-#if algorithm == 'kNN':
-#    kNN_sidebar()
+env = Environment(loader=FileSystemLoader(template_path), trim_blocks=True, lstrip_blocks=True)
 
-env = Environment(
-    loader=FileSystemLoader(template_path), trim_blocks=True, lstrip_blocks=True,
-)
 template = env.get_template("code-template.py.jinja")
 code = template.render(header=header, **inputs)
 
@@ -63,8 +58,3 @@ file_name = algorithm + ".py"
 download_button(code, file_name)
 
 st.code(code)
-
-#sidebar_input = template_specific_sidebar.show()
-
-#st.sidebar.subheader("Choose Classifier")
-#classifier = st.sidebar.selectbox("Classifier", ("Support Vector Machine (SVM)", "Logistic Regression", "Random Forest"))
