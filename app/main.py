@@ -15,10 +15,19 @@ def download_button(code, filename, text="Download (.py)"):
     b64 = base64.b64encode(code.encode()).decode()
     href = f'<a download="{filename}" href="data:file/txt;base64,{b64}">{text}</a>'
     st.markdown(href, unsafe_allow_html=True)
+
 # Page title.
 st.title("Machine Learning Code Generator")
 st.write("by Durgesh Samariya")
 st.markdown("-----")
+
+"""
+[![Star](https://img.shields.io/github/stars/durgeshsamariya/MLgenerator.svg?logo=github&style=social)](https://github.com/durgeshsamariya/MLgenerator/stargazers)
+&nbsp[![GitHub issues](https://img.shields.io/github/issues/durgeshsamariya/MLgenerator.svg)](https://GitHub.com/durgeshsamariya/MLgenerator/issues/)
+&nbsp[![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
+&nbsp[![Made With Love](https://img.shields.io/badge/Made%20With-Love-orange.svg)](https://github.com/chetanraj/awesome-github-badges) 
+&nbsp[![Buy me a coffee](https://img.shields.io/badge/Buy%20me%20a%20coffee--yellow.svg?logo=buy-me-a-coffee&logoColor=orange&style=social)](https://www.buymeacoffee.com/themlphdstudent)
+"""
 
 templates = {
     'Anomaly Detection': {
@@ -51,13 +60,17 @@ with st.sidebar:
             inputs = iForest_sidebar()
         if algorithm == "kNN":
             inputs = kNN_ad_sidebar()
+if task == "Anomaly Detection":
+    env = Environment(loader=FileSystemLoader(template_path), trim_blocks=True, lstrip_blocks=True)
 
-env = Environment(loader=FileSystemLoader(template_path), trim_blocks=True, lstrip_blocks=True)
+    template = env.get_template("code-template.py.jinja")
+    code = template.render(header=header, **inputs)
 
-template = env.get_template("code-template.py.jinja")
-code = template.render(header=header, **inputs)
+    file_name = task.replace(" ", "_") + "_" + algorithm + ".py"
+    download_button(code, file_name.lower())
 
-file_name = task.replace(" ", "_") + "_" + algorithm + ".py"
-download_button(code, file_name.lower())
+    st.code(code)
 
-st.code(code)
+else:
+    st.write("## Under Construction")
+    st.write("Only Anomaly Detection templetes are added. Please come back later for other templetes.")
