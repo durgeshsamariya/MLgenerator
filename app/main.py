@@ -1,6 +1,6 @@
 import streamlit as st
 import os
-from sidebars import kNN_sidebar
+from sidebars import kNN_AD_sidebar
 from sidebars import LOF_sidebar
 from sidebars import iForest_sidebar
 import base64
@@ -23,7 +23,8 @@ st.markdown("-----")
 templates = {
     'Anomaly Detection': {
         'LOF': 'templates/Anomaly Detection/LOF',
-        'iForest': 'templates/Anomaly Detection/iForest'
+        'iForest': 'templates/Anomaly Detection/iForest',
+        'kNN': 'templates/Anomaly Detection/kNN'
     },
     'Classification': {
         'kNN': 'templates/Classification/kNN'
@@ -43,18 +44,20 @@ with st.sidebar:
         template_path = templates[task][algorithm]
     else:
         template_path = templates[task]
-
-    if algorithm == 'LOF':
-        inputs = LOF_sidebar()
-    if algorithm == "iForest":
-        inputs = iForest_sidebar()
+    if task == "Anomaly Detection":
+        if algorithm == 'LOF':
+            inputs = LOF_sidebar()
+        if algorithm == "iForest":
+            inputs = iForest_sidebar()
+        if algorithm == "kNN":
+            inputs = kNN_AD_sidebar()
 
 env = Environment(loader=FileSystemLoader(template_path), trim_blocks=True, lstrip_blocks=True)
 
 template = env.get_template("code-template.py.jinja")
 code = template.render(header=header, **inputs)
 
-file_name = algorithm + ".py"
-download_button(code, file_name)
+file_name = task.replace(" ", "_") + "_" + algorithm + ".py"
+download_button(code, file_name.lower())
 
 st.code(code)
