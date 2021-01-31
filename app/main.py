@@ -35,12 +35,12 @@ templates = {
         'iForest': 'templates/Anomaly Detection/iForest',
         'kNN': 'templates/Anomaly Detection/kNN'
     },
-    'Classification': {
-        'kNN': 'templates/Classification/kNN'
-    },
-    'Clustering': {
-        'DBSCAN': 'templates/Clustering/DBSCAN'
-    }
+    #'Classification': {
+    #    'kNN': 'templates/Classification/kNN'
+    #},
+    #'Clustering': {
+    #    'DBSCAN': 'templates/Clustering/DBSCAN'
+    #}
 }
 
 with st.sidebar:
@@ -60,17 +60,12 @@ with st.sidebar:
             inputs = iForest_sidebar()
         if algorithm == "kNN":
             inputs = kNN_ad_sidebar()
-if task == "Anomaly Detection":
-    env = Environment(loader=FileSystemLoader(template_path), trim_blocks=True, lstrip_blocks=True)
+env = Environment(loader=FileSystemLoader(template_path), trim_blocks=True, lstrip_blocks=True)
 
-    template = env.get_template("code-template.py.jinja")
-    code = template.render(header=header, **inputs)
+template = env.get_template("code-template.py.jinja")
+code = template.render(header=header, **inputs)
 
-    file_name = task.replace(" ", "_") + "_" + algorithm + ".py"
-    download_button(code, file_name.lower())
+file_name = task.replace(" ", "_") + "_" + algorithm + ".py"
+download_button(code, file_name.lower())
 
-    st.code(code)
-
-else:
-    st.write("## Under Construction")
-    st.write("Only Anomaly Detection templetes are added. Please come back later for other templetes.")
+st.code(code)
