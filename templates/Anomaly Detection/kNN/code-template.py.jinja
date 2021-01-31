@@ -1,0 +1,103 @@
+{{ header("Install required libraries")}}
+# pip install pyod {% if data == "Benchmark data" %}pandas scikit-learn {% endif %}
+
+
+{{ header("Import required libraries")}}
+
+# importing required libraries
+from pyod.models.knn import KNN
+from pyod.utils.data import generate_data
+from pyod.utils.data import evaluate_print
+from pyod.utils.example import visualize
+{% if data == "Benchmark data" %}
+import pandas as pd
+from sklearn.model_selection import train_test_split 
+{% endif %}
+
+{{ header("Hyperparameters") }}
+
+# Set Hyperparameters
+k = {{ k }}
+search_algo = '{{ search_algo }}'
+dist = '{{ metric }}'
+
+{{ header("Data set") }}
+
+{% if data == "Synthetic data" %}
+# number of training points
+n_train = {{ n_train }}
+# number of testing points
+n_test = {{ n_test }}
+# percentage of outliers
+contamination = {{ contamination }}
+# number of features in data set
+n_features = {{ n_features }}
+
+# Generate Synthetic Data
+X_train, y_train, X_test, y_test = generate_data(n_train=n_train,
+                                                    n_test=n_test,
+                                                    n_features=n_features,
+                                                    contamination=contamination,
+                                                    random_state=42)
+{% else %}
+# Loading {{dataset}} dataset
+data = pd.read_csv("./data/ad/{{dataset}}.csv")
+X = data.copy().drop('outlier', axis=1)
+y = data['outlier']
+
+X_train, X_test, y_train,y_test = train_test_split(X, y, 
+                                    test_size = 0.2, 
+                                    stratify=y, 
+                                    random_state=42)
+
+{% endif %}
+
+{{ header("Training") }}
+
+# Train Model
+clf_name = 'KNN'
+clf = KNN(n_neighbors=k, algorithm=search_algo, metric=dist)
+clf.fit(X_train)
+
+{{ header("Testing") }}
+
+# Testing model on train data
+
+# get the prediction labels and outlier scores of the training data
+y_train_pred = clf.labels_  # binary labels (0: inliers, 1: outliers)
+y_train_scores = clf.decision_scores_  # raw outlier scores
+
+# evaluate and print the results
+print("\nOn Training Data:")
+evaluate_print(clf_name, y_train, y_train_scores)
+
+# Testing model on test data
+
+# get the prediction on the test data
+y_test_pred = clf.predict(X_test)  # outlier labels (0 or 1)
+y_test_scores = clf.decision_function(X_test)  # outlier scores
+
+print("\nOn Test Data:")
+evaluate_print(clf_name, y_test, y_test_scores)
+
+{{ header("Visualization")}}
+
+{% if data == "Synthetic data" %}
+{% if visualization_status %}
+{% if n_features == 2 %}
+# visualize the results
+{% if save %}
+visualize(clf_name, X_train, y_train, X_test, y_test, y_train_pred, 
+            y_test_pred, show_figure=True, save_figure=True)
+{% else %}
+visualize(clf_name, X_train, y_train, X_test, y_test, y_train_pred, 
+            y_test_pred, show_figure=True, save_figure=False)
+{% endif %}
+
+{% else %}
+# You can only visulize two dimensional data set,so set number of features = 2.
+{% endif %}
+{% endif %}
+{% else %}
+# You can only perform visualization on two dimensional Synthetic data set.
+{% endif %}
