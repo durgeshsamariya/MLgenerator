@@ -32,3 +32,26 @@ MLGenerator is simple web based machine learning starter code generator, build u
 4. Dimensionality Reduction
 - PCA
 - t-SNE
+
+## Installation
+To run **MLgenerator** in your local system, you have to install MLgenerator first.
+
+```
+git clone https://github.com/durgeshsamariya/MLgenerator.git
+cd MLgenerator
+pip install -r requirements.txt
+```
+
+## Run MLgenerator in your system
+
+```
+streamlit run app/main.py
+```
+
+## Contribution
+If you want to add template in MLgenerator, you can do it by following steps. 
+
+1. Add sidebar method in `./app/sidebars/{Desired Task}.py`. This function should contains a `{Algorithm_Name}_sidebar()` method.
+2. Update `./app/main.py` file with appropriate sidebar imports and call method. 
+3. Create folder in `./templates/{Desired Task}/`. The folder should be algorithm name.
+4. Create code template `code-template.py.jinja` in `./templates/{Desired Task}/{Algorithm Name}`.
