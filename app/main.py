@@ -5,6 +5,7 @@ from sidebars.anomaly_detection_sidebars import LOF_sidebar
 from sidebars.anomaly_detection_sidebars import iForest_sidebar
 from sidebars.classification_sidebars import kNN_sidebar
 from sidebars.classification_sidebars import SVM_sidebar
+from sidebars.classification_sidebars import Logistic_Regression_sidebar
 import base64
 from jinja2 import Environment, FileSystemLoader
 
@@ -50,6 +51,7 @@ templates = {
         'kNN': 'templates/Anomaly Detection/kNN'
     },
     'Classification': {
+        'Logistic Regression': 'templates/Classification/Logistic Regression',
         'kNN': 'templates/Classification/kNN',
         'SVM': 'templates/Classification/SVM'
     },
@@ -76,6 +78,8 @@ with st.sidebar:
         if algorithm == "kNN":
             inputs = kNN_ad_sidebar()
     if task == "Classification":
+        if algorithm == "Logistic Regression":
+            inputs = Logistic_Regression_sidebar()
         if algorithm == 'kNN':
             inputs = kNN_sidebar()
         if algorithm == 'SVM':
@@ -86,7 +90,7 @@ env = Environment(loader=FileSystemLoader(template_path), trim_blocks=True, lstr
 template = env.get_template("code-template.py.jinja")
 code = template.render(header=header, **inputs)
 
-file_name = task.replace(" ", "_") + "_" + algorithm + ".py"
+file_name = task.replace(" ", "_") + "_" + algorithm.replace(" ", "_") + ".py"
 download_button(code, file_name.lower())
 
 st.code(code)
