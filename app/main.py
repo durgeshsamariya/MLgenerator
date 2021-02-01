@@ -4,6 +4,7 @@ from sidebars.anomaly_detection_sidebars import kNN_ad_sidebar
 from sidebars.anomaly_detection_sidebars import LOF_sidebar
 from sidebars.anomaly_detection_sidebars import iForest_sidebar
 from sidebars.classification_sidebars import kNN_sidebar
+from sidebars.classification_sidebars import SVM_sidebar
 import base64
 from jinja2 import Environment, FileSystemLoader
 
@@ -49,7 +50,8 @@ templates = {
         'kNN': 'templates/Anomaly Detection/kNN'
     },
     'Classification': {
-        'kNN': 'templates/Classification/kNN'
+        'kNN': 'templates/Classification/kNN',
+        'SVM': 'templates/Classification/SVM'
     },
     #'Clustering': {
     #    'DBSCAN': 'templates/Clustering/DBSCAN'
@@ -76,6 +78,8 @@ with st.sidebar:
     if task == "Classification":
         if algorithm == 'kNN':
             inputs = kNN_sidebar()
+        if algorithm == 'SVM':
+            inputs = SVM_sidebar()
 
 env = Environment(loader=FileSystemLoader(template_path), trim_blocks=True, lstrip_blocks=True)
 
