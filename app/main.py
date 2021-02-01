@@ -3,6 +3,7 @@ import os
 from sidebars.anomaly_detection_sidebars import kNN_ad_sidebar
 from sidebars.anomaly_detection_sidebars import LOF_sidebar
 from sidebars.anomaly_detection_sidebars import iForest_sidebar
+from sidebars.classification_sidebars import kNN_sidebar
 import base64
 from jinja2 import Environment, FileSystemLoader
 
@@ -18,16 +19,28 @@ def download_button(code, filename, text="Download (.py)"):
 
 # Page title.
 st.title("Machine Learning Code Generator")
-st.write("by Durgesh Samariya")
-st.markdown("-----")
-
+#st.write("by Durgesh Samariya")
 """
 [![Star](https://img.shields.io/github/stars/durgeshsamariya/MLgenerator.svg?logo=github&style=social)](https://github.com/durgeshsamariya/MLgenerator/stargazers)
 &nbsp[![GitHub issues](https://img.shields.io/github/issues/durgeshsamariya/MLgenerator.svg)](https://GitHub.com/durgeshsamariya/MLgenerator/issues/)
 &nbsp[![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
 &nbsp[![Made With Love](https://img.shields.io/badge/Made%20With-Love-orange.svg)](https://github.com/chetanraj/awesome-github-badges) 
 &nbsp[![Buy me a coffee](https://img.shields.io/badge/Buy%20me%20a%20coffee--yellow.svg?logo=buy-me-a-coffee&logoColor=orange&style=social)](https://www.buymeacoffee.com/themlphdstudent)
+
 """
+st.markdown("-----")
+"""
+
+Generate your machine learning starter code in five simple steps. 
+
+1. Select Task (Anomaly Detection or Classification or Clustering).
+2. Select Algorithm
+3. Specify data set and hyperparameters.
+4. Starter code will be generated below.
+5. Download the code.
+"""
+st.markdown("-----")
+
 
 templates = {
     'Anomaly Detection': {
@@ -35,9 +48,9 @@ templates = {
         'iForest': 'templates/Anomaly Detection/iForest',
         'kNN': 'templates/Anomaly Detection/kNN'
     },
-    #'Classification': {
-    #    'kNN': 'templates/Classification/kNN'
-    #},
+    'Classification': {
+        'kNN': 'templates/Classification/kNN'
+    },
     #'Clustering': {
     #    'DBSCAN': 'templates/Clustering/DBSCAN'
     #}
@@ -60,6 +73,10 @@ with st.sidebar:
             inputs = iForest_sidebar()
         if algorithm == "kNN":
             inputs = kNN_ad_sidebar()
+    if task == "Classification":
+        if algorithm == 'kNN':
+            inputs = kNN_sidebar()
+
 env = Environment(loader=FileSystemLoader(template_path), trim_blocks=True, lstrip_blocks=True)
 
 template = env.get_template("code-template.py.jinja")
