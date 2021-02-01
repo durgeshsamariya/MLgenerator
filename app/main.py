@@ -6,6 +6,7 @@ from sidebars.anomaly_detection_sidebars import iForest_sidebar
 from sidebars.classification_sidebars import kNN_sidebar
 from sidebars.classification_sidebars import SVM_sidebar
 from sidebars.classification_sidebars import Logistic_Regression_sidebar
+from sidebars.classification_sidebars import RF_sidebar
 import base64
 from jinja2 import Environment, FileSystemLoader
 
@@ -53,7 +54,8 @@ templates = {
     'Classification': {
         'Logistic Regression': 'templates/Classification/Logistic Regression',
         'kNN': 'templates/Classification/kNN',
-        'SVM': 'templates/Classification/SVM'
+        'SVM': 'templates/Classification/SVM',
+        'Random Forest': 'templates/Classification/Random Forest'
     },
     #'Clustering': {
     #    'DBSCAN': 'templates/Clustering/DBSCAN'
@@ -84,6 +86,8 @@ with st.sidebar:
             inputs = kNN_sidebar()
         if algorithm == 'SVM':
             inputs = SVM_sidebar()
+        if algorithm == "Random Forest":
+            inputs = RF_sidebar()
 
 env = Environment(loader=FileSystemLoader(template_path), trim_blocks=True, lstrip_blocks=True)
 
