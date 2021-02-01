@@ -60,7 +60,7 @@ def kNN_ad_sidebar():
         )
         inputs["metric"] = DISTANCE_METRICS[dist]
 
-        inputs["visualization_status"] = st.checkbox('Visualization?', True)
+        inputs["visualization_status"] = st.checkbox('Visualization?', False)
         if inputs["visualization_status"]:
             inputs["save"] = st.checkbox('Do you want to save the figure?', False)
     return inputs
@@ -106,7 +106,7 @@ def LOF_sidebar():
         )
         inputs["metric"] = DISTANCE_METRICS[dist]
 
-        inputs["visualization_status"] = st.checkbox('Visualization?', True)
+        inputs["visualization_status"] = st.checkbox('Visualization?', False)
         if inputs["visualization_status"]:
             inputs["save"] = st.checkbox('Do you want to save the figure?', False)
     return inputs
@@ -144,7 +144,7 @@ def iForest_sidebar():
         inputs['trees'] = st.sidebar.number_input(
             "trees?", 100, None, 100,
         )
-        inputs["visualization_status"] = st.checkbox('Visualization?', True)
+        inputs["visualization_status"] = st.checkbox('Visualization?', False)
         if inputs["visualization_status"]:
             inputs["save"] = st.checkbox('Do you want to save the figure?', False)
     return inputs
