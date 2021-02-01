@@ -84,7 +84,8 @@ model.fit(X_train, y_train)
 cross_validation = cross_val_score(model, X_train, y_train, cv=5)
 
 # evaluate and print the results
-print("\nModel Performance on Training Data: {}".format(np.mean(cross_validation).round(2)))
+print("\nModel Performance on Training Data: {}".format(
+    np.mean(cross_validation).round(2)))
 
 # Testing model on test data
 
@@ -92,7 +93,8 @@ print("\nModel Performance on Training Data: {}".format(np.mean(cross_validation
 y_pred = model.predict(X_test)
 accuracy = model.score(X_test, y_test)
 
-print("\nModel Performance on Test Data: {}".format(accuracy.round(2)))
+print("\nModel Performance on Test Data: {}".format(
+    accuracy.round(2)))
 
 # Compute the Precision
 precision = precision_score(y_test, y_pred).round(2)
