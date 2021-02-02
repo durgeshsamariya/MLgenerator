@@ -73,7 +73,10 @@ X_train, X_test, y_train, y_test = train_test_split(X, y,
 {{ header("Training") }}
 
 # Train Random Forest Model
-model = RandomForestClassifier(n_estimators=n_estimators)
+model = RandomForestClassifier(n_estimators=n_estimators, 
+                                criterion=criterion, 
+                                max_depth=max_depth, 
+                                bootstrap=bootstrap)
 model.fit(X_train, y_train)
 
 {{ header("Testing") }}
