@@ -1,4 +1,6 @@
-# Machine Learning Code Generator
+# MLGenerator: Machine Learning Code Generator
+
+![MLgenerator](./resources/MLgenerator.gif)
 
 A web-app to generate code for different machine learning task.
 
