@@ -8,6 +8,7 @@ from sidebars.classification_sidebars import SVM_sidebar
 from sidebars.classification_sidebars import Logistic_Regression_sidebar
 from sidebars.classification_sidebars import RF_sidebar
 from sidebars.classification_sidebars import Decision_Trees_sidebar
+from sidebars.clustering_sidebars import DBSCAN_sidebar
 import base64
 from jinja2 import Environment, FileSystemLoader
 
@@ -59,9 +60,9 @@ templates = {
         'Random Forest': 'templates/Classification/Random Forest',
         'Decision Tree': 'templates/Classification/Decision Trees'
     },
-    #'Clustering': {
-    #    'DBSCAN': 'templates/Clustering/DBSCAN'
-    #}
+    'Clustering': {
+        'DBSCAN': 'templates/Clustering/DBSCAN'
+    }
 }
 
 with st.sidebar:
@@ -92,6 +93,9 @@ with st.sidebar:
             inputs = RF_sidebar()
         if algorithm == "Decision Tree":
             inputs = Decision_Trees_sidebar()
+    if task == "Clustering":
+        if algorithm == "DBSCAN":
+            inputs = DBSCAN_sidebar()
 
 env = Environment(loader=FileSystemLoader(template_path), trim_blocks=True, lstrip_blocks=True)
 
