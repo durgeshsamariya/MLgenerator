@@ -10,6 +10,8 @@ Try out MLGenerator : [https://ml-generator.herokuapp.com](https://ml-generator.
 
 MLGenerator is simple web based machine learning starter code generator, build using [streamlit](https://www.streamlit.io). You can build custom starter code for different machine learning algorithms/tasks such as Regression, Classification, Clustering and Anomaly(Outlier) detection. MLGenerator uses different widely used Python libraries for different task such as Scikit-Learn, PyOD etc.
 
+> MLgenerator is inspired by [traingenerator](https://github.com/jrieke/traingenerator#adding-new-templates) 
+
 ## Major Machine Learning Algorithms included in MLGenerator
 
 1. Classification
