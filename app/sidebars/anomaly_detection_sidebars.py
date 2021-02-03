@@ -1,8 +1,8 @@
 import streamlit as st
 
-
 DISTANCE_METRICS = {
-    "Minkowski": "minkowski",
+    "Euclidean": "euclidean",
+    "Manhattan": "manhattan"
 }
 
 SEARCH_ALGORITHM = {
@@ -28,16 +28,16 @@ def kNN_ad_sidebar():
             ("Synthetic data", "Benchmark data"),
         )
         if inputs["data"] == "Synthetic data":
-            inputs['contamination'] = st.sidebar.number_input(
+            inputs['contamination'] = st.number_input(
                 "Contamination (percentage of outliers)", 0.0, None, 0.1, format="%f",
             )
-            inputs['n_train'] = st.sidebar.number_input(
+            inputs['n_train'] = st.number_input(
                 "number of training data points", 100, None, 200,
             )
-            inputs['n_test'] = st.sidebar.number_input(
+            inputs['n_test'] = st.number_input(
                 "number of testing data points", 50, None, 100,
             )
-            inputs['n_features'] = st.sidebar.number_input(
+            inputs['n_features'] = st.number_input(
                 "number of features in data set", 1, None, 2,
             )
         elif inputs["data"] == "Benchmark data":
@@ -74,16 +74,16 @@ def LOF_sidebar():
             ("Synthetic data", "Benchmark data"),
         )
         if inputs["data"] == "Synthetic data":
-            inputs['contamination'] = st.sidebar.number_input(
+            inputs['contamination'] = st.number_input(
                 "Contamination (percentage of outliers)", 0.0, None, 0.1, format="%f",
             )
-            inputs['n_train'] = st.sidebar.number_input(
+            inputs['n_train'] = st.number_input(
                 "number of training data points", 100, None, 200,
             )
-            inputs['n_test'] = st.sidebar.number_input(
+            inputs['n_test'] = st.number_input(
                 "number of testing data points", 50, None, 100,
             )
-            inputs['n_features'] = st.sidebar.number_input(
+            inputs['n_features'] = st.number_input(
                 "number of features in data set", 1, None, 2,
             )
         elif inputs["data"] == "Benchmark data":
@@ -120,16 +120,16 @@ def iForest_sidebar():
             ("Synthetic data", "Benchmark data"),
         )
         if inputs["data"] == "Synthetic data":
-            inputs['contamination'] = st.sidebar.number_input(
+            inputs['contamination'] = st.number_input(
                 "Contamination (percentage of outliers)", 0.0, None, 0.1, format="%f",
             )
-            inputs['n_train'] = st.sidebar.number_input(
+            inputs['n_train'] = st.number_input(
                 "number of training data points", 100, None, 200,
             )
-            inputs['n_test'] = st.sidebar.number_input(
+            inputs['n_test'] = st.number_input(
                 "number of testing data points", 50, None, 100,
             )
-            inputs['n_features'] = st.sidebar.number_input(
+            inputs['n_features'] = st.number_input(
                 "number of features in data set", 1, None, 2,
             )
         elif inputs["data"] == "Benchmark data":
@@ -138,10 +138,10 @@ def iForest_sidebar():
             )
             inputs["dataset"] = ANOMALY_DETECTION_DATASETS[dataset]
         st.write("## Model Hyperparameter")
-        inputs['samples'] = st.sidebar.number_input(
+        inputs['samples'] = st.number_input(
             "samples?", 2, None, 128,
         )
-        inputs['trees'] = st.sidebar.number_input(
+        inputs['trees'] = st.number_input(
             "trees?", 100, None, 100,
         )
         inputs["visualization_status"] = st.checkbox('Visualization?', False)
