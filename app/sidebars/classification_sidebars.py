@@ -1,7 +1,8 @@
 import streamlit as st
 
 DISTANCE_METRICS = {
-    "Minkowski": "minkowski",
+    "Euclidean": "euclidean",
+    "Manhattan": "manhattan"
 }
 
 SEARCH_ALGORITHM = {
@@ -40,13 +41,13 @@ def kNN_sidebar():
             ("Synthetic data", "Benchmark data"),
         )
         if inputs["data"] == "Synthetic data":
-            inputs['n_samples'] = st.sidebar.number_input(
+            inputs['n_samples'] = st.number_input(
                 "number of data points", 100, None, 1000,
             )
-            inputs['n_features'] = st.sidebar.number_input(
+            inputs['n_features'] = st.number_input(
                 "number of features in data set", 10, None, 10,
             )
-            inputs['n_classes'] = st.sidebar.number_input(
+            inputs['n_classes'] = st.number_input(
                 "number of classes", 2, None, 2,
             )
         elif inputs["data"] == "Benchmark data":
@@ -81,13 +82,13 @@ def SVM_sidebar():
             ("Synthetic data", "Benchmark data"),
         )
         if inputs["data"] == "Synthetic data":
-            inputs['n_samples'] = st.sidebar.number_input(
+            inputs['n_samples'] = st.number_input(
                 "number of data points", 100, None, 1000,
             )
-            inputs['n_features'] = st.sidebar.number_input(
+            inputs['n_features'] = st.number_input(
                 "number of features in data set", 10, None, 10,
             )
-            inputs['n_classes'] = st.sidebar.number_input(
+            inputs['n_classes'] = st.number_input(
                 "number of classes", 2, None, 2,
             )
         elif inputs["data"] == "Benchmark data":
@@ -123,13 +124,13 @@ def Logistic_Regression_sidebar():
             ("Synthetic data", "Benchmark data"),
         )
         if inputs["data"] == "Synthetic data":
-            inputs['n_samples'] = st.sidebar.number_input(
+            inputs['n_samples'] = st.number_input(
                 "number of data points", 100, None, 1000,
             )
-            inputs['n_features'] = st.sidebar.number_input(
+            inputs['n_features'] = st.number_input(
                 "number of features in data set", 10, None, 10,
             )
-            inputs['n_classes'] = st.sidebar.number_input(
+            inputs['n_classes'] = st.number_input(
                 "number of classes", 2, None, 2,
             )
         elif inputs["data"] == "Benchmark data":
@@ -158,13 +159,13 @@ def RF_sidebar():
             ("Synthetic data", "Benchmark data"),
         )
         if inputs["data"] == "Synthetic data":
-            inputs['n_samples'] = st.sidebar.number_input(
+            inputs['n_samples'] = st.number_input(
                 "number of data points", 100, None, 1000,
             )
-            inputs['n_features'] = st.sidebar.number_input(
+            inputs['n_features'] = st.number_input(
                 "number of features in data set", 10, None, 10,
             )
-            inputs['n_classes'] = st.sidebar.number_input(
+            inputs['n_classes'] = st.number_input(
                 "number of classes", 2, None, 2,
             )
         elif inputs["data"] == "Benchmark data":
@@ -199,13 +200,13 @@ def Decision_Trees_sidebar():
             ("Synthetic data", "Benchmark data"),
         )
         if inputs["data"] == "Synthetic data":
-            inputs['n_samples'] = st.sidebar.number_input(
+            inputs['n_samples'] = st.number_input(
                 "number of data points", 100, None, 1000,
             )
-            inputs['n_features'] = st.sidebar.number_input(
+            inputs['n_features'] = st.number_input(
                 "number of features in data set", 10, None, 10,
             )
-            inputs['n_classes'] = st.sidebar.number_input(
+            inputs['n_classes'] = st.number_input(
                 "number of classes", 2, None, 2,
             )
         elif inputs["data"] == "Benchmark data":
