@@ -8,6 +8,7 @@ from .classification_sidebars import RF_sidebar
 from .classification_sidebars import Decision_Trees_sidebar
 from .clustering_sidebars import DBSCAN_sidebar
 from .clustering_sidebars import KMEANS_sidebar
+from .clustering_sidebars import OPTICS_sidebar
 
 __all__ = ['kNN_ad_sidebar',
             'LOF_sidebar',
@@ -18,4 +19,5 @@ __all__ = ['kNN_ad_sidebar',
             'RF_sidebar',
             'Decision_Trees_sidebar',
             'DBSCAN_sidebar',
-            'KMEANS_sidebar']
+            'KMEANS_sidebar',
+            'OPTICS_sidebar']
