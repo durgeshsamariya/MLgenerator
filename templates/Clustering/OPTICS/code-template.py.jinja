@@ -1,0 +1,67 @@
+{{ header("Install required libraries")}}
+
+# install required libraries
+# pip install scikit-learn numpy
+
+{{ header("Import required libraries")}}
+
+# importing required libraries
+import numpy as np
+from sklearn.cluster import OPTICS
+from sklearn.datasets import make_blobs
+from sklearn.metrics.cluster import adjusted_rand_score
+from sklearn.metrics.cluster import normalized_mutual_info_score
+from sklearn.metrics.cluster import adjusted_mutual_info_score
+from sklearn.metrics.cluster import fowlkes_mallows_score
+
+{{ header("Hyperparameters") }}
+
+min_samples = {{ min_samples }}
+dist = '{{ metric }}'
+search_algo = '{{ search_algo }}'
+
+{{ header("Data set") }}
+
+# number of training points
+n_samples = {{ n_samples }}
+# number of features in data set
+n_features = {{ n_features }}
+# number of cluster centers
+n_centers = {{ n_centers }}
+# cluster standard deviation
+cluster_std = {{ cluster_std }}
+
+# Generate Synthetic Data
+
+X, y = make_blobs(n_samples=n_samples, 
+            n_features=n_features, 
+            centers=n_centers, 
+            cluster_std=cluster_std)
+
+{{ header("Training") }}
+
+# Train OPTICS Model
+model = OPTICS(min_samples=min_samples, metric=dist, 
+            algorithm=search_algo)
+model.fit(X)
+
+{{ header("Testing") }}
+
+# get prediction labels for each data points
+y_pred = model.labels_
+
+# Adjusted Rand Score
+print("\nAdjusted Rand Score : {}".format(
+    np.round(adjusted_rand_score(y, y_pred), decimals=2)))
+
+# Normalized Mutual Information Based Score
+print("\nNormalized Mutual Information Based Score : {}".format(
+    np.round(normalized_mutual_info_score(y, y_pred), decimals=2)))
+
+# Adjusted Mutual Information (AMI) 
+print("\nAdjusted Mutual Information (AMI) : {}".format(
+    np.round(adjusted_mutual_info_score(y, y_pred), decimals=2)))
+
+# Fowlkes-Mallows Score
+print("\nFowlkes-Mallows Score : {}".format(
+    np.round(fowlkes_mallows_score(y, y_pred), decimals=2)))
