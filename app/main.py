@@ -10,6 +10,7 @@ from sidebars.classification_sidebars import RF_sidebar
 from sidebars.classification_sidebars import Decision_Trees_sidebar
 from sidebars.clustering_sidebars import DBSCAN_sidebar
 from sidebars.clustering_sidebars import KMEANS_sidebar
+from sidebars.clustering_sidebars import OPTICS_sidebar
 import base64
 from jinja2 import Environment, FileSystemLoader
 
@@ -63,7 +64,8 @@ templates = {
     },
     'Clustering': {
         'DBSCAN': 'templates/Clustering/DBSCAN',
-        'K-Means': 'templates/Clustering/K-Means'
+        'K-Means': 'templates/Clustering/K-Means',
+        'OPTICS': 'templates/Clustering/OPTICS',
     }
 }
 
@@ -100,6 +102,8 @@ with st.sidebar:
             inputs = DBSCAN_sidebar()
         if algorithm == "K-Means":
             inputs = KMEANS_sidebar()
+        if algorithm == "OPTICS":
+            inputs = OPTICS_sidebar()
 
 env = Environment(loader=FileSystemLoader(template_path), trim_blocks=True, lstrip_blocks=True)
 
