@@ -9,6 +9,7 @@ from sidebars.classification_sidebars import Logistic_Regression_sidebar
 from sidebars.classification_sidebars import RF_sidebar
 from sidebars.classification_sidebars import Decision_Trees_sidebar
 from sidebars.clustering_sidebars import DBSCAN_sidebar
+from sidebars.clustering_sidebars import KMEANS_sidebar
 import base64
 from jinja2 import Environment, FileSystemLoader
 
@@ -61,7 +62,8 @@ templates = {
         'Decision Tree': 'templates/Classification/Decision Trees'
     },
     'Clustering': {
-        'DBSCAN': 'templates/Clustering/DBSCAN'
+        'DBSCAN': 'templates/Clustering/DBSCAN',
+        'K-Means': 'templates/Clustering/K-Means'
     }
 }
 
@@ -96,6 +98,8 @@ with st.sidebar:
     if task == "Clustering":
         if algorithm == "DBSCAN":
             inputs = DBSCAN_sidebar()
+        if algorithm == "K-Means":
+            inputs = KMEANS_sidebar()
 
 env = Environment(loader=FileSystemLoader(template_path), trim_blocks=True, lstrip_blocks=True)
 
